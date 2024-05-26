@@ -87,5 +87,20 @@ public:
         GLuint location = uniforms.at(key);
         glUniform1f(location, value);
     }
+
+    void set_int_vec3_uniform(std::string key, int v0, int v1, int v2) {
+        GLuint location = uniforms.at(key);
+        glUniform3i(location, v0, v1, v2);
+    }
+
+    void set_float_vec3_uniform(std::string key, float v0, float v1, float v2) {
+        GLuint location = uniforms.at(key);
+        glUniform3f(location, v0, v1, v2);
+    }
+
+    void set_bool_uniform(std::string key, bool value) {
+        GLuint location = uniforms.at(key);
+        glUniform1i(location, value);
+    }
 };
 

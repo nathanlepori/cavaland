@@ -4,10 +4,12 @@ uniform float[120] heights;
 uniform float width;
 uniform float height;
 uniform float num_bars;
+uniform vec3 color1;
+uniform vec3 color2;
+uniform float alpha;
+uniform bool showInactiveBars;
 
 void main() {
-    vec3 color1 = vec3(69.f, 104.f, 220.f);
-    vec3 color2 = vec3(176.f, 106.f, 179.f);
     vec3 normalize = vec3(255.f);
 
     vec2 uv = vec2(gl_FragCoord.x / width, gl_FragCoord.y / height);
@@ -29,8 +31,8 @@ void main() {
 
     float currentHeight = heights[idx];
 
-    if ((uv.x > barStart && (uv.y < currentHeight || uv.y < 0.01f))) {
-        gl_FragColor = vec4(mix(color1/normalize, color2/normalize, uv.x), 1.0f);
+    if (uv.x > barStart && (uv.y < currentHeight || (showInactiveBars && uv.y < 0.01f))) {
+        gl_FragColor = vec4(mix(color1/normalize, color2/normalize, uv.x), alpha);
     } else {
         discard; // Skip rendering for the area outside the bars
     }

@@ -8,14 +8,14 @@ uniform float[120] heights;
 uniform float width;
 uniform float height;
 uniform float num_bars;
+uniform vec3 color1;
+uniform vec3 color2;
 
 float sineInOut(float t) {
     return -0.5 * (cos(PI * t) - 1.0);
 }
 
 void main() {
-    vec3 color1 = vec3(69.f, 104.f, 220.f);
-    vec3 color2 = vec3(176.f, 106.f, 179.f);
     vec3 normalize = vec3(255.f);
 
     vec2 uv = vec2(gl_FragCoord.x / width, gl_FragCoord.y / height);
