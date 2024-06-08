@@ -25,7 +25,7 @@ int main(int argc, const char **argv) {
   if (vm.count("config")) {
     ConfigManager::get_instance().init(vm["config"].as<std::string>());
   } else {
-    ConfigManager::get_instance().init("/usr/share/cavaland/example.cfg");
+    ConfigManager::get_instance().init("/usr/share/cavaland/cavaland.cfg");
   }
 
   auto app = CavalandApp::create();

@@ -25,7 +25,7 @@ std::string ConfigManager::get_or_default(std::string key, std::string def) {
   try {
     return config.lookup(key).c_str();
   } catch (const libconfig::SettingNotFoundException& e) {
-    std::cerr << e.what() << std::endl;
+    // std::cerr << e.what() << std::endl;
     return def;
   }
 }

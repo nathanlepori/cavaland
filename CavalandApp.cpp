@@ -8,6 +8,9 @@
 #include "gtk4-layer-shell.h"
 #include <format>
 #include <gtkmm/cssprovider.h>
+#include <gtkmm.h>
+
+#include "CavaWindow.hpp"
 
 CavalandApp::CavalandApp() : Gtk::Application() {}
 
@@ -41,6 +44,14 @@ void CavalandApp::on_activate() {
   Gtk::StyleContext::add_provider_for_display(
       Gdk::Display::get_default(), provider,
       GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
+
+  // Assign to monitor
+  auto monitorIndex = ConfigManager::get_instance().get_or_default("monitor", "");
+  auto monitors = gdk_display_get_monitors(Gdk::Display::get_default()->gobj());
+  if (!monitorIndex.empty()) {
+    auto monitor = static_cast<GdkMonitor *>(g_list_model_get_item(monitors, std::stoi(monitorIndex)));
+    gtk_layer_set_monitor(window->gobj(), monitor);
+  }
 
   add_window(*window);
   window->present();
